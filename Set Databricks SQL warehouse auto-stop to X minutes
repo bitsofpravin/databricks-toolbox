@@ -1,0 +1,33 @@
+import requests
+import json
+ 
+# Replace with your Databricks workspace URL and personal access token
+workspace_url = 'https://adb-example.azuredatabricks.net/'
+personal_access_token = ''
+ 
+# Replace with your SQL warehouse ID
+warehouse_id = ''
+ 
+# API endpoint
+url = f'{workspace_url}/api/2.0/sql/warehouses/{warehouse_id}/edit'
+ 
+# Request headers
+headers = {
+'Authorization': f'Bearer {personal_access_token}',
+'Content-Type': 'application/json'
+}
+ 
+# Request body
+data = {
+'auto_stop_mins': 1
+}
+ 
+# Make the API request
+response = requests.post(url, headers=headers, data=json.dumps(data))
+ 
+# Check the response
+if response.status_code == 200:
+    print('Auto-stop interval set to 1 minute successfully.')
+else:
+    print(f'Error: {response.status_code} - {response.text}')
+ 
